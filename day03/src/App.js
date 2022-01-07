@@ -1,6 +1,6 @@
 import React from 'react';
 import './assets/css/reset.css';
-import Main from './sample2/Main';
+import Main from './sample3/Main';
 
 const App = () => {
   return (
