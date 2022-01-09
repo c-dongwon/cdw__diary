@@ -1,28 +1,53 @@
 import React, { useState } from 'react';
-import './Test1.css'
+import Test1Sub from './Test1Sub';
 
 const Test1 = () => {
-    const [ age , setAge ] = useState(20)
-    const [ isColor , setIsColor ] = useState( false )
+    const [data,setData] = useState([
+        {id:1,name:'김다미'},
+        {id:2,name:'최우식'},
+        {id:3,name:'송혜교'},
+        {id:4,name:'김도윤'},
+        {id:5,name:'유재석'},
+    ])
 
-    const onAge = ()  => {
-        // setAge( age - 1 )
-        setAge( prevAge => prevAge - 1 )
+    const onDel1 = () =>{
+        setData(data.filter(item => item.id !== 1))
+    } 
+    const onDel2 = () =>{
+        setData(data.filter(item => item.id !== 3))
     }
-
-    const onToggle = ()=> {
-        setIsColor( !isColor )
+    const onDel = (id) =>{
+        setData(data.filter(item => item.id !== id))
+        // 매개변수로 아이디값 받아옴
     }
-
+    const onMod1 = () =>{
+        setData(data.map(item =>{
+            if(item.id === 2){
+                return{
+                    ...item,
+                    name:'강호동'
+                }
+            }else{
+                return item
+            }
+        }))
+    }
+    const onMod2 = () =>{
+        setData(data.map(item => item.id === 4 ? {...item, name:'삼항연산자'}:item))
+    }
+    const onMod = (id) =>{
+        setData(data.map(item => item.id === id ? {...item,name:'dd'}:item))
+    }
     return (
-        <div className={`wrap ${isColor ? 'pink':'tomato'}`}>
-            <h2> background-color: {isColor ? 'pink':'tomato'} </h2>
-            <h2> 나이 : {age} </h2>
-            <p>
-                <button onClick={ onToggle }>배경색바꾸기</button>
-                <button onClick={() => setAge( age + 1 )}>증가</button>
-                <button onClick={ onAge }>감소</button>
-            </p>
+        <div>
+            <Test1Sub onDel1={onDel1} onDel2={onDel2} onDel={onDel} onMod={onMod} onMod1={onMod1} onMod2={onMod2}/>
+            <ul>
+               {
+                   data.map(item => <li key={item.id}>
+                       {item.id}/{item.name}
+                   </li>)
+               }
+            </ul>
         </div>
     );
 };

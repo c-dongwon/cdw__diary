@@ -1,11 +1,11 @@
 import React from 'react';
 import './assets/css/reset.css';
-import Gallery from './220108/Gallery';
+import Todos from './todos/Todos'
 
 const App = () => {
   return (
     <div>
-        <Gallery />
+        <Todos />
     </div>
   );
 };
